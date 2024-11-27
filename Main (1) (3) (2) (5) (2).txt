@@ -86,7 +86,7 @@ local Window = Fluent:CreateWindow({
     Title = "Wave",
     SubTitle = "Hub",
     TabWidth = 160,
-    Size = UDim2.fromOffset(660, 350),
+    Size = UDim2.fromOffset(550, 350),
     Acrylic = false,
     Theme = "Dark",
     MinimizeKey = Enum.KeyCode.End
@@ -100,7 +100,6 @@ local Tabs = {
     item = Window:AddTab({ Title = "item", Icon = "" }),
     Home = Window:AddTab({ Title = "Tab Status Sever", Icon = "" }),
     tele = Window:AddTab({ Title = "Tab Teleport", Icon = "" }),
-    an = Window:AddTab({ Title = "Tab Misc", Icon = "" }),
     meo = Window:AddTab({ Title = "Tab Mirage", Icon = "" }),
     Race = Window:AddTab({ Title = "Tab Race", Icon = "" }),
     vs = Window:AddTab({ Title = "Tab Visual", Icon = "" }),
@@ -2081,13 +2080,13 @@ end)()
 
 local SelectFastAttackMode = (SelectFastAttackMode or "Super Fast")
 
-SelectedFastAttackMode = {"0","Vip","0.01","0.10"}
+SelectedFastAttackMode = {"0","0.00","0.01","0.10"}
 
 local function ChangeModeFastAttack(SelectFastAttackMode)
 	if SelectFastAttackMode == "0" then
 		FireCooldown = 0
-	elseif SelectFastAttackMode == "Vip" then
-		FireCooldown = .0
+	elseif SelectFastAttackMode == "0.00" then
+		FireCooldown = 0.00
 	elseif SelectFastAttackMode == "0.01" then
 		FireCooldown = 0.01
 	elseif SelectFastAttackMode == "0.10" then
@@ -2473,6 +2472,11 @@ end)
 local Toggle = Tabs.Main:AddToggle("Bypass TP", { Title = "Auto Click", Default = false })
 Toggle:OnChanged(function(Value)
     Duma = Value
+end)
+
+local Toggle = Tabs.Main:AddToggle("Auto Spawn Boss Katakuti", { Title = "Auto Spawn Boss Cake Prince", Default = true })
+Toggle:OnChanged(function(Value)
+    _G.AutoSpawnCP = Value
 end)
 
 spawn(function()
@@ -4284,7 +4288,6 @@ Toggle:OnChanged(function(Value)
     end)
     
                   ----------Tab Spawn Boss Katakuri Và Mấy Đồ Linh Tinh-------
-local LinhTinh = Tabs.an:AddSection("Misc")
 
 task.spawn(
     function()
@@ -4305,10 +4308,7 @@ task.spawn(
         end
     end
 )
-local Toggle = Tabs.an:AddToggle("Auto Spawn Boss Kata", { Title = "Auto Spawn Boss Cake Prince", Default = true })
-Toggle:OnChanged(function(Value)
-    _G.AutoSpawnCP = Value
-end)
+
 
 spawn(function() 
    while wait() do
@@ -4318,10 +4318,6 @@ spawn(function()
       end
    end) 
 
-local Toggle = Tabs.an:AddToggle("Walk Water", { Title = "Walk On Water", Default = true })
-Toggle:OnChanged(function(Value)
-    _G.NuocLon = Value
-end)
 
 spawn(function()
       while task.wait() do
@@ -4335,10 +4331,7 @@ spawn(function()
 			end
 		end)
                           
-local Toggle = Tabs.an:AddToggle("Walk Water", { Title = "Auto Rejoin", Description = "Rejoin When Kick", Default = true })
-Toggle:OnChanged(function(Value)
-    _G.Rejoin = Value
-end)                          
+                  
                           
 spawn(function()
     while true do wait()
@@ -4353,10 +4346,7 @@ spawn(function()
     end
 end)                          
 
-local Toggle = Tabs.an:AddToggle("RemoveConMe", { Title = "Remove Damege", Description = "Remove Damege", Default = false })
-Toggle:OnChanged(function(AnDepZaiHubOnTop)
-   removedame = AnDepZaiHubOnTop
-end)
+
 
 spawn(function()
    while wait() do
@@ -4368,10 +4358,6 @@ spawn(function()
      end
  end)
 
-local Toggle = Tabs.an:AddToggle("RemoveConMe", { Title = "Remove Nitify", Description = "Remove Notify", Default = false })
-Toggle:OnChanged(function(AnDepZaiHubOnTop)
-   removenotify = AnDepZaiHubOnTop
-end)
 
 spawn(function()
    while wait() do
@@ -4383,13 +4369,7 @@ spawn(function()
    end
 end)
 
-Tabs.an:AddButton({
-    Title = "Hop Server Low Player",
-    Description = "",
-    Callback = function()
-HopLowServer()
-    end
-})
+
 -------Tab Race-----
 local DaoNaoCac = Tabs.meo:AddParagraph({
     Title = "Status Mirage",
@@ -4500,8 +4480,8 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(
 end
 
 Tabs.Race:AddButton({
-    Title = "Teleport To Great Tree",
-    Description = "Tween Đến Đảo Cây",
+    Title = "Teleport Great Tree",
+    Description = ",
     Callback = function()
     topos(CFrame.new(28603.7305, 14896.5352, 105.38382))
     wait(.4)
@@ -5376,6 +5356,30 @@ spawn(function()
         end
     end
 end)
+
+local Nham = Tabs.vs:AddSection("Remove And Bug")
+
+local Toggle = Tabs.vs:AddToggle("RemoveConMe", { Title = "Remove Nitify", Description = "Remove Notify", Default = false })
+Toggle:OnChanged(function(AnDepZaiHubOnTop)
+   removenotify = AnDepZaiHubOnTop
+end)
+
+local Toggle = Tabs.vs:AddToggle("RemoveConMe", { Title = "Remove Damege", Description = "Remove Damege", Default = false })
+Toggle:OnChanged(function(AnDepZaiHubOnTop)
+   removedame = AnDepZaiHubOnTop
+end)
+
+local Toggle = Tabs.vs:AddToggle("Walk Water", { Title = "Auto Rejoin", Description = "Rejoin When Kick", Default = true })
+Toggle:OnChanged(function(Value)
+    _G.Rejoin = Value
+end)        
+
+local Toggle = Tabs.vs:AddToggle("Walk Water", { Title = "Walk On Water", Default = true })
+Toggle:OnChanged(function(Value)
+    _G.NuocLon = Value
+end)
+
+local LinhTinh = Tabs.vs:AddSection("Esp")
 
 local Toggle = Tabs.vs:AddToggle("MyToggle", {Title = "Esp Player", Default = false })
 
